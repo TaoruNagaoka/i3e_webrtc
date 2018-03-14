@@ -477,7 +477,7 @@
     // getDeviceStream({video: true, audio: true}) // audio: false <-- ontrack once, audio:true --> ontrack twice!!
     //navigator.mediaDevices.getUserMedia({video: true, audio: true}) // <-- Chrome OK with adapter.js
     navigator.mediaDevices.getUserMedia({video: true, audio: {
-      echoCancellation: false,  noiseSuppression: false, autoGainControl: false })
+      echoCancellation: false,  noiseSuppression: false, autoGainControl: false } })
       // https://stackoverflow.com/questions/37326846/disabling-auto-gain-conctrol-with-webrtc-app
     .then(function (stream) { // success
       localStream = stream;
