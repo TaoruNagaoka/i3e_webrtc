@@ -291,8 +291,8 @@
     }
     
     // generate rondom room, and replace URL
-    let room = 'room_' + getUniqueStr(); 
-    window.history.pushState(null, null, 'multi_firebase_with_stun_v3.html?' + room);
+    let room = 'room_' + getUniqueStr();
+    window.history.pushState(null, null, document.location.search +'?' + room);
     return room;
   }
 
@@ -475,7 +475,10 @@
   // start local video
   function startVideo() {
     // getDeviceStream({video: true, audio: true}) // audio: false <-- ontrack once, audio:true --> ontrack twice!!
-    navigator.mediaDevices.getUserMedia({video: true, audio: true}) // <-- Chrome OK with adapter.js
+    //navigator.mediaDevices.getUserMedia({video: true, audio: true}) // <-- Chrome OK with adapter.js
+    navigator.mediaDevices.getUserMedia({video: true, audio: {
+      echoCancellation: false,  noiseSuppression: false, autoGainControl: false })
+      // https://stackoverflow.com/questions/37326846/disabling-auto-gain-conctrol-with-webrtc-app
     .then(function (stream) { // success
       localStream = stream;
       playVideo(localVideo, stream);
